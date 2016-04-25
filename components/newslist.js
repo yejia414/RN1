@@ -32,7 +32,7 @@ export default class newslist extends Component {
       })
       .done();
 	}
-	renderLoadingView() {
+	static renderLoadingView() {
 		return (
 		  <View style={styles.container}>
 			<Text>
@@ -52,7 +52,7 @@ export default class newslist extends Component {
         style={styles.listView} />
 		);
 	}
-	renderNew(newTemp) {
+	static renderNew(newTemp) {
 		return (
 			<View style={styles.container}>
 				<Image 
@@ -99,6 +99,6 @@ var styles = StyleSheet.create({
 	  marginBottom:8
   },
   newAbstract: {
-	  fontSize:12, 
+	  fontSize:12
   }
 });

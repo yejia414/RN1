@@ -11,7 +11,7 @@ import React, {
   View,
   Navigator
 } from 'react-native';
-import NewsList from './components/newslist';
+import NewsList from './components/NewsList';
 
 class rn1 extends Component {
   render() {

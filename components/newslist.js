@@ -1,13 +1,12 @@
 import React, {
-  AppRegistry,
   Component,
   StyleSheet,
   Text,
   View,
-  Image,
   ListView
 } from 'react-native';
 var REQUEST_URL = 'http://new3band.com/web/newslist?text=0&page=0&rows=10';
+import NewsItem from './NewsItem';
 export default class newslist extends Component {
 	constructor(props) {
         super(props);
@@ -32,11 +31,11 @@ export default class newslist extends Component {
       })
       .done();
 	}
-	static renderLoadingView() {
+	renderLoadingView() {
 		return (
 		  <View style={styles.container}>
 			<Text>
-			  Loading movies...
+			  正在加载新闻列表...
 			</Text>
 		  </View>
 		);
@@ -47,23 +46,10 @@ export default class newslist extends Component {
 		}
 		return (
 		<ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderNew}
-        style={styles.listView} />
-		);
-	}
-	static renderNew(newTemp) {
-		return (
-			<View style={styles.container}>
-				<Image 
-				source={{uri:'http://new3band.com/web/image/newsTitleImg?fileName='+newTemp.wzimgurl}}
-				style={styles.img}
-				/>
-				<View style={styles.rightContainer}>
-				<Text style={styles.title} numberOfLines={1}>{newTemp.wztitle}</Text>
-				<Text style={styles.newAbstract} numberOfLines={2}>{newTemp.wzabstrace}</Text>
-				</View>
-			</View>
+        	dataSource={this.state.dataSource}
+        	renderRow={newTemp => <NewsItem newsItem={newTemp}/>}
+        	style={styles.listView}
+		/>
 		);
 	}
 }
@@ -73,32 +59,9 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-	paddingTop:8,
-	paddingRight:8,
-	marginBottom:8,
-	paddingLeft:8
+    backgroundColor: '#F5FCFF'
   },
   listView:{
 	  
-  },
-  rightContainer: {
-    flex: 1,
-	marginTop:8,
-	marginRight:8,
-	marginBottom:8,
-	marginLeft:8
-  },
-  img: {
-	  width:90,
-	  height:60
-  },
-  title: {
-	  fontSize:14,
-	  fontWeight:'bold',
-	  marginBottom:8
-  },
-  newAbstract: {
-	  fontSize:12
   }
 });
